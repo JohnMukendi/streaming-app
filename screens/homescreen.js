@@ -20,7 +20,13 @@ const numColumns = 2
 const HomeScreen = ({navigation}) => {
 
   //pulling out of context
-  const {movies,goBack,setGoBack,pageNum,setPageNum,errMessage,err,options} = useContext(AppContext)
+  const {
+    movies,goBack,
+    setGoBack,pageNum,
+    setPageNum,errMessage,
+    err,options,
+    movie,setMovie
+  } = useContext(AppContext)
 
   const scrollRef = useRef(null)
 
@@ -32,7 +38,7 @@ const HomeScreen = ({navigation}) => {
    }
   
    const [modalVisible, setModalVisible] = useState(false);
-   const [movie,setMovie] = useState({})
+   
    
 
    //##########GETTING TRAILERES######################
@@ -50,6 +56,12 @@ const HomeScreen = ({navigation}) => {
     <TouchableOpacity activeOpacity={0.6}
     //Show MORE INFO FUNCTION
       delayLongPress = {200}
+
+      onPress = {() =>{
+        setMovie(item)
+        navigation.navigate('Cinema')
+      }}
+
       onLongPress={async()=>{
 
         

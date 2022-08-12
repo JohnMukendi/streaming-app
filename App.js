@@ -19,13 +19,16 @@ export default function App() {
   const [errMessage,setErrMessage] = useState('');
   const [pageNum,setPageNum] = useState(1);
 
+  const [movie,setMovie] = useState({})
+  const [onCinema,setOnCinema] = useState(false);
+  
   const options = {
     method: 'GET',
     url: 'https://movies-app1.p.rapidapi.com/api/movies',
     params : {page : pageNum},    
     headers: {
-      'X-RapidAPI-Key': '451fc34789msh0cf52e758202bc7p17f1c7jsn111b8b6b2ee3',
-      'X-RapidAPI-Host': 'movies-app1.p.rapidapi.com'
+      'X-RapidAPI-Key': 'c0aab84c29msh8d03cd7985125d0p1a9842jsn3706edee89da',
+    'X-RapidAPI-Host': 'movies-app1.p.rapidapi.com'
     },
   };
   
@@ -78,7 +81,8 @@ export default function App() {
     pageNum,setPageNum,
     moviesData,setMoviesData,
     options,errMessage,
-    err
+    err,movie,setMovie,
+    onCinema,setOnCinema
   }
 
   //show loader if data isnt fetched otherwise show screens

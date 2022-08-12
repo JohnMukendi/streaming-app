@@ -6,7 +6,7 @@ import {
     Image,ImageBackground,
   }
 from 'react-native'
-import WebView from 'react-native-webview'
+import {WebView} from 'react-native-webview'
 import React from 'react'
 import{useState,useContext,useEffect} from 'react'
 
@@ -16,9 +16,8 @@ const axios = require('axios')
 const MovieModal = ({movie,modalVisible,setModalVisible,trailer,errMsg,setTrailer}) => {
     
     const {colors,options} = useContext(AppContext)
-    //console.log(movie)
-      
-      
+    
+        
     
 
   return (
@@ -44,8 +43,11 @@ const MovieModal = ({movie,modalVisible,setModalVisible,trailer,errMsg,setTraile
             <Text style={{color:'white'}}>{errMsg}</Text>
             
             <WebView
+              onLoad={console.log('webview loaded')}
+              originWhitelist = {['*']}
+              style={{backgroundColor:'blue'}}
               source={{uri:'https://github.com/react-native-webview/react-native-webview'}}
-              //  source = {{html : `<iframe width='100%' height='300px' src=${trailer.embed}`}}
+                //source = {{html : `<iframe width='100%' height='300px' src=${trailer.embed}`}}
             />
             
             <Pressable

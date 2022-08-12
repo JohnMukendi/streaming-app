@@ -4,18 +4,23 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../screens/homescreen';
 import CategoriesScreen from '../screens/categories'
+import CinemaScreen from '../screens/cinemaScreen'
 import SettingsScreen from '../screens/settingsScreen';
 import { AppContext } from '../context/context';
 import CustomDrawer from './customDrawer';
 import { FontAwesome,Ionicons,AntDesign,Entypo,MaterialIcons } 
 from '@expo/vector-icons';
-import {useRoute} from '@react-navigation/native';
+import MyStack from './stacks';
+import { useNavigationState } from '@react-navigation/native';
+
+
+
 const Drawer = createDrawerNavigator();
 
 export default function App() {
 
   
-  const {colors} = React.useContext(AppContext)
+  const {colors,onCinema} = React.useContext(AppContext)
   console.log(colors.fullRed)
   return (
     <NavigationContainer
@@ -32,7 +37,7 @@ export default function App() {
             color : 'white',
             marginTop : 80       
           },
-          headerShown : true,
+        
           headerTitleStyle : {color : colors.gold},
           drawerLabelStyle : {marginLeft : -20,fontWeight:'500',fontSize:18,letterSpacing:2},
           
@@ -40,11 +45,12 @@ export default function App() {
         })}
       >
         <Drawer.Screen
-         name='Home' component={HomeScreen}
+         name='Home' component={MyStack}
          options ={{
           drawerIcon : ({color}) => <Entypo name='home' color={color} size={18} />,
-          
-        }}
+          headerShown : !onCinema
+          } 
+        }
         
         />
         <Drawer.Screen
@@ -58,7 +64,15 @@ export default function App() {
           drawerIcon : ({color}) => <FontAwesome name='gears' color={color} size={18} />,
         }}
         />
-        
+        {/* <Drawer.Screen
+         name = 'Cinema' component={CinemaScreen}
+         options = {{
+          headerShown :false,
+          drawerItemStyle : {height : 0}
+         }}
+
+        /> */}
+         
       </Drawer.Navigator>
       
     </NavigationContainer>
