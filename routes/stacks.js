@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 function MyStack({}) {
 
-    const {setOnCinema} = useContext(AppContext);
+    const {setOnCinema,colors,darkMode} = useContext(AppContext);
 
     return (
         <Stack.Navigator >
@@ -36,7 +36,7 @@ function MyStack({}) {
         name="Cinema" component={CinemaScreen}
         options = {({navigation}) =>(
             {
-                headerStyle : {backgroundColor : '#33333380'},
+                headerStyle : {backgroundColor : darkMode ? '#33333380' : colors.lightgray},
                 title : '',
                 animation : 'fade',
                 headerLeft : ()=>(

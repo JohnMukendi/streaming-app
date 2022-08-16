@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     paddingBottom : 50,
   },
   videoBox: {
-    backgroundColor: darkMode ? "#353935" : '#777',
+    backgroundColor: darkMode ? "#353935" : '#C0C0C0',
     marginVertical : 8,
     marginHorizontal : 8,
     alignItems : 'center',
@@ -126,11 +126,11 @@ const styles = StyleSheet.create({
 
       onPress = {async() =>{
         setMovie(item)
-        const itemTitle = item.title.replace(/ /g,'-')
+      
         navigation.navigate('Cinema')
         setOnCinema(true);
 
-        console.log(movie)
+        
         //const images = await axios.get(`https://serpapi.com/search.json?q=Peach&tbm=isch&ijn=0`)
         //console.log('IMAGES',images.data.images_results)
       }}
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
         
         setMovieId(item._id)
 
-        console.log('fetching trailers...')
-        console.log('MOVIE ID:',movieId)
+        //console.log('fetching trailers...')
+        //console.log('MOVIE ID:',movieId)
         try {
           const fetchOptions = {
             method : 'GET',
@@ -155,12 +155,12 @@ const styles = StyleSheet.create({
           console.log(fetchOptions)
           console.log('THE RESPONSE:',response.data.result[0])
           setTrailer(response.data.result[0])
-          console.log('TRAILER:',trailer)
+          //console.log('TRAILER:',trailer)
         }  
         
         catch (error) {
           setErrmsg(JSON.stringify(error))
-          console.log('THE ERROR:',error,)
+          //console.log('THE ERROR:',error,)
         }
 
      }}
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   )
   ////////////////////Video Box///////////////////////////
   
-  const image = darkMode ? require('../assets/bg-image.jpeg') : require('../assets/white-image.jpg')
+  const image = darkMode ? require('../assets/bg-image.jpeg') : require('../assets/bg-image2.jpg')
   
   //fetching more data when end of screen is reached
   function handleEndReach(){

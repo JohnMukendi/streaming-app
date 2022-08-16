@@ -13,21 +13,53 @@ const AppBar = ({scrollRef,navigation}) => {
     const screenState = useNavigationState(state => state.routeNames[state.index]);
 
     const homeRef = useRef(null)
-    const {colors,setGoBack} = useContext(AppContext)
+    const {colors,setGoBack,darkMode} = useContext(AppContext)
 
-    const iconColor = '#e4d00a'
-    const initColor = colors.gold
-    const [homeIconColor,setHomeIconColor] = useState(colors.gold);
-    const [searchIconColor,setSearchIconColor] = useState(colors.gold);
-    const [catIconColor,setCatIconColor] = useState(colors.gold);
-    const [filterIconColor,setFilterIconColor] = useState(colors.gold);
+    const iconCurrentMode = darkMode ? colors.gold : colors.darkgold;
+
+    const iconColor = '#e4d00a' 
+    const initColor = darkMode ? colors.gold : colors.darkgold 
+    const [homeIconColor,setHomeIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
+    const [searchIconColor,setSearchIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
+    const [catIconColor,setCatIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
+    const [filterIconColor,setFilterIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
+    
+    const styles = StyleSheet.create({
+        container : {
+            flexDirection : 'row',
+            backgroundColor : darkMode ? '#343434' : colors.lightgray,
+            width : '100%',
+            justifyContent : 'space-evenly',
+            alignItems : 'center',
+            position : 'absolute',
+            top : '93.5%',
+            flex : 1,
+            height : 50,
+            shadowColor : 'black',
+            shadowOffset : 20,
+            shadowRadius : 20,
+            borderTopRightRadius : 40,
+            borderTopLeftRadius : 40,
+            elevation : 15,
+                    
+        },
+        navtab : {
+            flex : 1,
+            alignItems : 'center',
+            justifyContent : 'center',
+            
+        },
+        text : {
+            color : darkMode ? '#E2DFD2' : colors.darkgray
+        }
+    });
     
     //home button
     function handleHomePress(){
 
         
 
-        setHomeIconColor(iconColor)
+        
         console.log(screenState)
         if (screenState === 'HomeScreen'){
             scrollRef.current.scrollToOffset({offset : 0,animated : true})
@@ -39,54 +71,46 @@ const AppBar = ({scrollRef,navigation}) => {
         
     }
     return ( 
-        <View style={styles.container}>
+        <View  style={styles.container}>
             <TouchableOpacity
-                
-                onPressIn={handleHomePress} 
-                onPressOut ={() =>setHomeIconColor(initColor)}
+                onPressIn={handleHomePress}
                 style={styles.navtab}
                 activeOpacity={0.5}
                 
             >
-                <Entypo name="home" size={24} color={homeIconColor} />
+                <Entypo name="home" size={24} color={iconCurrentMode} />
                 <Text style = {styles.text}>
                     Home
                 </Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
-                onPressIn={() => setSearchIconColor(iconColor)} 
-                onPressOut ={() =>setSearchIconColor(initColor)}
                 style={styles.navtab}
                 activeOpacity={0.5}
                 
             >
-                <FontAwesome name="search" size={24} color={searchIconColor}/>    
+                <FontAwesome name="search" size={24} color={iconCurrentMode}/>    
                 <Text style = {styles.text}>
                     Search
                 </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPressIn={() => setCatIconColor(iconColor)} 
-                onPressOut ={() =>setCatIconColor(initColor)}
                 activeOpacity={0.5}
                 style={styles.navtab}
             >
                 
-                <MaterialIcons name="category" size={24} color={catIconColor} />
+                <MaterialIcons name="category" size={24} color={iconCurrentMode} />
                 <Text style = {styles.text}>
                     Categories
                 </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPressIn={() => setFilterIconColor(iconColor)} 
-                onPressOut ={() =>setFilterIconColor(initColor)}
                 style={styles.navtab}
                 activeOpacity={0.5}
             >
-                <FontAwesome name="filter" size={24} color={filterIconColor} />    
+                <FontAwesome name="filter" size={24} color={iconCurrentMode} />    
                 <Text style = {styles.text}>
                     Filter
                 </Text>
@@ -95,31 +119,5 @@ const AppBar = ({scrollRef,navigation}) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container : {
-        flexDirection : 'row',
-        backgroundColor : '#343434',
-        width : '100%',
-        justifyContent : 'space-evenly',
-        alignItems : 'center',
-        position : 'absolute',
-        top : '93.5%',
-        flex : 1,
-        height : 50,
-        shadowColor : 'white',
-        shadowOffset : 20,
-        shadowRadius : 20,
-        borderTopRightRadius : 40,
-        borderTopLeftRadius : 40        
-    },
-    navtab : {
-        flex : 1,
-        alignItems : 'center',
-        justifyContent : 'center',
-        
-    },
-    text : {
-        color : '#E2DFD2'
-    }
-});
+
 export default AppBar;

@@ -80,7 +80,10 @@ export default function App() {
       red : '#88080840',
       fullRed : '#880808',
       gold : '#FFD70080',
-      fullGold : '#FFD700'
+      fullGold : '#FFD700',
+      lightgray : '#D3D3D3',
+      darkgray : '#343434',
+      darkgold : '#b8860b'
     },
     goBack,setGoBack,
     pageNum,setPageNum,

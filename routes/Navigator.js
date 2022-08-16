@@ -20,11 +20,11 @@ const Drawer = createDrawerNavigator();
 export default function App() {
 
   
-  const {colors,onCinema} = React.useContext(AppContext)
-  console.log(colors.fullRed)
+  const {colors,onCinema,darkMode} = React.useContext(AppContext)
+  
   return (
     <NavigationContainer
-      theme={{colors:{background:'#343434',text:'white' }}}
+      theme={{colors:{background:darkMode ? '#343434' : 'D3D3D3',text:darkMode ? 'white' : 'black' }}}
       
     >
       <Drawer.Navigator 
@@ -33,12 +33,12 @@ export default function App() {
         
         screenOptions={() =>({
           drawerStyle: {
-            backgroundColor : '#343434',
+            backgroundColor : darkMode ? '#343434' : '#D3D3D3',
             color : 'white',
             marginTop : 80       
           },
-        
-          headerTitleStyle : {color : colors.gold},
+          headerStyle : {backgroundColor : darkMode ? '#343434' : '#D3D3D3'},
+          headerTitleStyle : {color : darkMode ? colors.gold : colors.darkgold},
           drawerLabelStyle : {marginLeft : -20,fontWeight:'500',fontSize:18,letterSpacing:2},
           
           drawerActiveBackgroundColor : colors.gold
