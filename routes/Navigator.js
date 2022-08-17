@@ -35,7 +35,7 @@ export default function App() {
           drawerStyle: {
             backgroundColor : darkMode ? '#343434' : '#D3D3D3',
             color : 'white',
-            marginTop : 80       
+                   
           },
           headerStyle : {backgroundColor : darkMode ? '#343434' : '#D3D3D3'},
           headerTitleStyle : {color : darkMode ? colors.gold : colors.darkgold},
