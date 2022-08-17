@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 
       onPress = {async() =>{
         setMovie(item)
-        //console.log(item)
+        console.log(item)
         navigation.navigate('Cinema')
         setOnCinema(true);
 

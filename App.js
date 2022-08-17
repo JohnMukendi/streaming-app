@@ -22,7 +22,8 @@ export default function App() {
   const [movie,setMovie] = useState({})
   const [trailer,setTrailer] = useState({})
   const [onCinema,setOnCinema] = useState(false);
-  
+  const [onHome,setOnHome] = useState(false);
+
   const [genre,setGenre] = useState('')
   const options = {
     method: 'GET',
@@ -106,7 +107,8 @@ export default function App() {
     trailer,setTrailer,
     onCinema,setOnCinema,
     darkMode,setDarkMode,
-    genre,setGenre
+    genre,setGenre,
+    onHome,setOnHome
   }
 
   //show loader if data isnt fetched otherwise show screens

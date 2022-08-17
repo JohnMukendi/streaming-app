@@ -1,6 +1,6 @@
 import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import { FontAwesome,Ionicons,AntDesign,Entypo,MaterialIcons } from '@expo/vector-icons';
-import { useState,useContext,useRef } from 'react';
+import { useState,useContext,useRef, useEffect } from 'react';
 import { AppContext } from '../context/context';
 import { useNavigationState } from '@react-navigation/native';
 
@@ -13,8 +13,9 @@ const AppBar = ({scrollRef,navigation}) => {
     const screenState = useNavigationState(state => state.routeNames[state.index]);
 
     const homeRef = useRef(null)
-    const {colors,setGoBack,darkMode} = useContext(AppContext)
+    const {colors,setGoBack,darkMode,genre,setOnCinema} = useContext(AppContext)
 
+    
     const iconCurrentMode = darkMode ? colors.gold : colors.darkgold;
 
     const iconColor = '#e4d00a' 
@@ -37,7 +38,6 @@ const AppBar = ({scrollRef,navigation}) => {
             borderTopRightRadius : 40,
             borderTopLeftRadius : 40,
             elevation : 15,
-            
                     
         },
         navtab : {
@@ -53,9 +53,6 @@ const AppBar = ({scrollRef,navigation}) => {
     
     //home button
     function handleHomePress(){
-
-        
-
         
         console.log(screenState)
         if (screenState === 'HomeScreen'){
@@ -65,8 +62,16 @@ const AppBar = ({scrollRef,navigation}) => {
             navigation.navigate('Home')
         }
         
-        
     }
+    //search buton
+    function handleSearchPress(){
+        //setOnCinema(true)
+        navigation.navigate('SearchScreen')
+    }
+    useEffect(()=>{
+        screenState === 'HomeScreen' ? scrollRef.current.scrollToOffset({offset : 0,animated : true}) : null  
+    },[genre]);
+
     return ( 
         <View  style={styles.container}>
             <TouchableOpacity
@@ -84,7 +89,7 @@ const AppBar = ({scrollRef,navigation}) => {
             <TouchableOpacity 
                 style={styles.navtab}
                 activeOpacity={0.5}
-                
+                onPressIn={handleSearchPress}
             >
                 <FontAwesome name="search" size={24} color={iconCurrentMode}/>    
                 <Text style = {styles.text}>
