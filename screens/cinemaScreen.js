@@ -50,7 +50,7 @@ const CinemaScreen = ({navigation}) => {
         </View>
         {/* MOVIE PLAYER */}
           <Button title='Watch' onPress={() =>{
-            console.log(navigation)
+            
               navigation.navigate('MovieScreen')
             }} />
         {/*MOVIE PLAYER */}

@@ -23,50 +23,63 @@ export default function App() {
   const [trailer,setTrailer] = useState({})
   const [onCinema,setOnCinema] = useState(false);
   
+  const [genre,setGenre] = useState('')
   const options = {
     method: 'GET',
     url: 'https://movies-app1.p.rapidapi.com/api/movies',
-    params : {page : pageNum},    
+    params : {page : pageNum ,sort : 'year', genres : genre},    
     headers: {
       'X-RapidAPI-Key': 'c0aab84c29msh8d03cd7985125d0p1a9842jsn3706edee89da',
     'X-RapidAPI-Host': 'movies-app1.p.rapidapi.com'
     },
   };
   
-  
+  async function fetchData (changeGenre){
+    try {
+
+      console.log('fetching data ...')
+      const res = await axios(options)
+      const data = await res.data
+      console.log('DATA SUCCESSFULLY FETCHED !!!')
+      
+      if (!changeGenre){
+        setMovies((prev) =>{
+          console.log('set new movies')
+          return prev.concat(data.results)
+      })
+      }else{
+        setMovies(data.results)
+      }
+      //const allMovies = 
+    
+      //console.log('THE MOVIES:',movies)
+      
+      setLoaded(true)
+      //console.log(movies)
+      //#####################################
+       
+    } catch (error) {
+      console.log('FETCH ERROR :',error)
+      setErrMessage(error.message)
+      setErr(true)
+    }
+  }
 
     useEffect(() =>{
 
-      async function fetchData (){
-        try {
+      fetchData(false)
+      
+    },[pageNum]);
 
-          console.log('fetching data ...')
-          const res = await axios(options)
-          const data = await res.data
-          console.log('DATA SUCCESSFULLY FETCHED !!!')
-          setMovies((prev) =>{
-            
-              return prev.concat(data.results)
-          })
-          //const allMovies = 
-        
-          //console.log('THE MOVIES:',movies)
-          
-          setLoaded(true)
-          //console.log(movies)
-          //#####################################
-           
-        } catch (error) {
-          console.log('FETCH ERROR :',error)
-          setErrMessage(error.message)
-          setErr(true)
-        }
+    useEffect(()=>{
+      console.log('use effect ran');
+      if (genre.length !==0){
+        fetchData(true)
+      }else{
+        console.log('fetch data wasnt called for genres')
       }
       
-
-      fetchData()
-      
-    },[pageNum])
+    },[genre])
   //#########################//
 
   //GLOBAL STATES
@@ -92,7 +105,8 @@ export default function App() {
     err,movie,setMovie,
     trailer,setTrailer,
     onCinema,setOnCinema,
-    darkMode,setDarkMode
+    darkMode,setDarkMode,
+    genre,setGenre
   }
 
   //show loader if data isnt fetched otherwise show screens

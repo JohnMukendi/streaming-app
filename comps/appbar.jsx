@@ -19,10 +19,6 @@ const AppBar = ({scrollRef,navigation}) => {
 
     const iconColor = '#e4d00a' 
     const initColor = darkMode ? colors.gold : colors.darkgold 
-    const [homeIconColor,setHomeIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
-    const [searchIconColor,setSearchIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
-    const [catIconColor,setCatIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
-    const [filterIconColor,setFilterIconColor] = darkMode ? useState(colors.gold) : useState(colors.darkgold)
     
     const styles = StyleSheet.create({
         container : {
@@ -41,6 +37,7 @@ const AppBar = ({scrollRef,navigation}) => {
             borderTopRightRadius : 40,
             borderTopLeftRadius : 40,
             elevation : 15,
+            
                     
         },
         navtab : {
