@@ -1,4 +1,4 @@
-import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet, TouchableOpacity,Dimensions} from 'react-native';
 import { FontAwesome,Ionicons,AntDesign,Entypo,MaterialIcons } from '@expo/vector-icons';
 import { useState,useContext,useRef, useEffect } from 'react';
 import { AppContext } from '../context/context';
@@ -7,13 +7,18 @@ import { useNavigationState } from '@react-navigation/native';
 
 const AppBar = ({scrollRef,navigation}) => {
     
-    
+    const screenHeight = Dimensions.get('window').height
+    console.log('screenheight:',screenHeight)
 
+    var appBarY = '93.5%'
+    if (screenHeight < 840){
+        appBarY = '90%'
+    }
     //the state of the screen
     const screenState = useNavigationState(state => state.routeNames[state.index]);
 
     const homeRef = useRef(null)
-    const {colors,setGoBack,darkMode,genre,setOnCinema} = useContext(AppContext)
+    const {colors,setGoBack,darkMode,genre,setOnCinema,setOnHome} = useContext(AppContext)
 
     
     const iconCurrentMode = darkMode ? colors.gold : colors.darkgold;
@@ -29,7 +34,7 @@ const AppBar = ({scrollRef,navigation}) => {
             justifyContent : 'space-evenly',
             alignItems : 'center',
             position : 'absolute',
-            top : '93.5%',
+            top : appBarY,
             flex : 1,
             height : 50,
             shadowColor : 'black',
@@ -66,6 +71,7 @@ const AppBar = ({scrollRef,navigation}) => {
     //search buton
     function handleSearchPress(){
         //setOnCinema(true)
+        setOnHome(false)
         navigation.navigate('SearchScreen')
     }
     useEffect(()=>{

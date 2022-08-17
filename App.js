@@ -24,11 +24,12 @@ export default function App() {
   const [onCinema,setOnCinema] = useState(false);
   const [onHome,setOnHome] = useState(false);
 
-  const [genre,setGenre] = useState('')
+  const [genre,setGenre] = useState('');
+  const [query,setQuery] = useState('')
   const options = {
     method: 'GET',
     url: 'https://movies-app1.p.rapidapi.com/api/movies',
-    params : {page : pageNum ,sort : 'year', genres : genre},    
+    params : {page : pageNum ,sort : 'year', genres : genre, query : query},    
     headers: {
       'X-RapidAPI-Key': 'c0aab84c29msh8d03cd7985125d0p1a9842jsn3706edee89da',
     'X-RapidAPI-Host': 'movies-app1.p.rapidapi.com'
@@ -74,13 +75,13 @@ export default function App() {
 
     useEffect(()=>{
       console.log('use effect ran');
-      if (genre.length !==0){
+      if (genre.length !==0 || query.length !==0){
         fetchData(true)
       }else{
-        console.log('fetch data wasnt called for genres')
+        console.log('fetch data wasnt called for genres or quries')
       }
       
-    },[genre])
+    },[genre,query]);
   //#########################//
 
   //GLOBAL STATES
@@ -108,7 +109,8 @@ export default function App() {
     onCinema,setOnCinema,
     darkMode,setDarkMode,
     genre,setGenre,
-    onHome,setOnHome
+    onHome,setOnHome,
+    query,setQuery
   }
 
   //show loader if data isnt fetched otherwise show screens

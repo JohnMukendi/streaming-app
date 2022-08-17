@@ -50,7 +50,7 @@ export default function App() {
          options ={{
           drawerIcon : ({color}) => <Entypo name='home' color={color} size={18} />,
           headerShown : onHome,
-          swipeEnabled : !onCinema
+          swipeEnabled : onHome
           }
            
         }

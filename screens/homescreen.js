@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   Image,Dimensions,ImageBackground
 } from "react-native";
-
+import { useFocusEffect } from '@react-navigation/native';
 import AppBar from "../comps/appbar";
 import { AppContext } from "../context/context";
-import { useState,useContext,useRef,useEffect } from "react";
+import { useState,useContext,useRef,useEffect, useCallback } from "react";
 import MovieModal from '../comps/movieModal'
 const axios = require('axios')
 const screenHeight = Dimensions.get('window').height
@@ -26,9 +26,10 @@ const HomeScreen = ({navigation}) => {
     setPageNum,errMessage,
     err,options,
     movie,setMovie,setOnCinema,
-    trailer,setTrailer,darkMode
+    trailer,setTrailer,darkMode,setOnHome
   } = useContext(AppContext)
 
+  
 ///STYLE/////////////
 const styles = StyleSheet.create({
   container: {
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
         setMovie(item)
         console.log(item)
         navigation.navigate('Cinema')
-        setOnCinema(true);
+        setOnHome(false);
 
         
         //const images = await axios.get(`https://serpapi.com/search.json?q=Peach&tbm=isch&ijn=0`)

@@ -24,7 +24,7 @@ return (
         //     <source src="${movieSource}" type="video/mp4"></video>
         //     iframe src=${movieSource}></iframe><p>p</p>`
         // }}
-        source={{html : `<iframe src = ${movieSource}><iframe>`}}
+        source={{html: `<iframe width="100%" height="50%" src=${movieSource} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`}}
         style = {{height : 200,width:'100%',flex:1,alignSelf: 'stretch',}}
         javaScriptEnabled={true}
         domStorageEnabled={true}
