@@ -67,12 +67,19 @@ const MovieModal = ({movie,modalVisible,setModalVisible,trailer,errMsg,setTraile
             <YoutubePlayer
             
             //webViewStyle = {{height:400}}
-            webViewProps={{style : {aspectRatio:1/1}}}
-              height={300}
+            webViewProps={{style : {aspectRatio:1/1},  injectedJavaScript: `
+            var element = document.getElementsByClassName('container')[0];
+            element.style.position = 'unset';
+            element.style.paddingBottom = 'unset';
+            true;
+          `,}}
+              height={290}
               width={'100%'}
               play={playing}
               videoId={trailer.videoId}
               onChangeState={onStateChange}
+              
+              
             />
              <Pressable 
               style={[{backgroundColor:colors.gold,marginBottom:20,...styles.button}]}

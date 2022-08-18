@@ -20,7 +20,7 @@ const Drawer = createDrawerNavigator();
 export default function App() {
 
   
-  const {colors,onCinema,darkMode} = React.useContext(AppContext)
+  const {colors,onCinema,darkMode,onHome} = React.useContext(AppContext)
   
   return (
     <NavigationContainer
@@ -37,6 +37,7 @@ export default function App() {
             color : 'white',
                    
           },
+          //headerShown : false,
           headerStyle : {backgroundColor : darkMode ? '#343434' : '#D3D3D3'},
           headerTitleStyle : {color : darkMode ? colors.gold : colors.darkgold},
           drawerLabelStyle : {marginLeft : -20,fontWeight:'500',fontSize:18,letterSpacing:2},
@@ -48,8 +49,8 @@ export default function App() {
          name='Home' component={MyStack}
          options ={{
           drawerIcon : ({color}) => <Entypo name='home' color={color} size={18} />,
-          headerShown : !onCinema,
-          swipeEnabled : !onCinema
+          headerShown : onHome,
+          swipeEnabled : onHome
           }
            
         }

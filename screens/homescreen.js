@@ -5,16 +5,18 @@ import {
   FlatList,
   Modal,
   TouchableOpacity,
-  Image,Dimensions,ImageBackground
+  Image,Dimensions,ImageBackground,
+  ActivityIndicator
 } from "react-native";
-
+import { useFocusEffect } from '@react-navigation/native';
 import AppBar from "../comps/appbar";
 import { AppContext } from "../context/context";
-import { useState,useContext,useRef,useEffect } from "react";
+import { useState,useContext,useRef,useEffect, useCallback } from "react";
 import MovieModal from '../comps/movieModal'
 const axios = require('axios')
 const screenHeight = Dimensions.get('window').height
 const numColumns = 2
+import Loader from "../context/loader";
 
 //component
 const HomeScreen = ({navigation}) => {
@@ -25,10 +27,11 @@ const HomeScreen = ({navigation}) => {
     setGoBack,pageNum,
     setPageNum,errMessage,
     err,options,
-    movie,setMovie,setOnCinema,
-    trailer,setTrailer,darkMode
+    movie,setMovie,loaded,
+    trailer,setTrailer,darkMode,setOnHome
   } = useContext(AppContext)
 
+  
 ///STYLE/////////////
 const styles = StyleSheet.create({
   container: {
@@ -126,9 +129,9 @@ const styles = StyleSheet.create({
 
       onPress = {async() =>{
         setMovie(item)
-        //console.log(item)
+        console.log(item)
         navigation.navigate('Cinema')
-        setOnCinema(true);
+        setOnHome(false);
 
         
         //const images = await axios.get(`https://serpapi.com/search.json?q=Peach&tbm=isch&ijn=0`)
@@ -217,6 +220,7 @@ const styles = StyleSheet.create({
 
         {err ? <Button title={errMessage}/> : null}
       <SafeAreaView style = {styles.mainScreen}>
+      {!loaded ? <Loader /> : null}
         <FlatList 
           
           data={movies}
