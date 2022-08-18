@@ -39,6 +39,7 @@ export default function App() {
   async function fetchData (changeGenre){
     try {
 
+      setLoaded(false)
       console.log('fetching data ...')
       const res = await axios(options)
       const data = await res.data
@@ -110,7 +111,7 @@ export default function App() {
     darkMode,setDarkMode,
     genre,setGenre,
     onHome,setOnHome,
-    query,setQuery
+    query,setQuery,loaded
   }
 
   //show loader if data isnt fetched otherwise show screens

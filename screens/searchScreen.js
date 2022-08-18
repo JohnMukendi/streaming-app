@@ -1,12 +1,14 @@
-import { StyleSheet,TouchableOpacity,Image, Text, TextInput, View,FlatList } from 'react-native'
+import { StyleSheet,TouchableOpacity,Image, 
+  Text, ActivityIndicator, View,FlatList 
+} from 'react-native'
 import React, { useCallback, useContext, useState } from 'react'
 import { AppContext } from '../context/context'
 import { useFocusEffect } from '@react-navigation/native';
-
+import Loader from '../context/loader';
 
 const SearchScreen = ({navigation}) => {
 
-    const {darkMode,colors,movies,setMovie,setOnHome,setQuery,daarkMode} = useContext(AppContext);
+    const {darkMode,colors,movies,setMovie,setOnHome,setQuery,loaded} = useContext(AppContext);
 
     //###############################################
     const styles = StyleSheet.create({
@@ -121,7 +123,7 @@ const SearchScreen = ({navigation}) => {
             onSubmitEditing={handleSearch}
 
         /> */}
-        
+        {!loaded ? <Loader /> : null}
         <FlatList 
           
           data={movies}

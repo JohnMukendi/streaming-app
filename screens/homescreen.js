@@ -5,7 +5,8 @@ import {
   FlatList,
   Modal,
   TouchableOpacity,
-  Image,Dimensions,ImageBackground
+  Image,Dimensions,ImageBackground,
+  ActivityIndicator
 } from "react-native";
 import { useFocusEffect } from '@react-navigation/native';
 import AppBar from "../comps/appbar";
@@ -15,6 +16,7 @@ import MovieModal from '../comps/movieModal'
 const axios = require('axios')
 const screenHeight = Dimensions.get('window').height
 const numColumns = 2
+import Loader from "../context/loader";
 
 //component
 const HomeScreen = ({navigation}) => {
@@ -25,7 +27,7 @@ const HomeScreen = ({navigation}) => {
     setGoBack,pageNum,
     setPageNum,errMessage,
     err,options,
-    movie,setMovie,setOnCinema,
+    movie,setMovie,loaded,
     trailer,setTrailer,darkMode,setOnHome
   } = useContext(AppContext)
 
@@ -218,6 +220,7 @@ const styles = StyleSheet.create({
 
         {err ? <Button title={errMessage}/> : null}
       <SafeAreaView style = {styles.mainScreen}>
+      {!loaded ? <Loader /> : null}
         <FlatList 
           
           data={movies}
